@@ -574,4 +574,105 @@
             },
             researchgate: {
                 title: 'ResearchGate',
-                description: 'Mạng xã hội học thuật cho nhà khoa học và nghiên cứu viên. Nơi chia sẻ bài báo, đặt câu h
+                description: 'Mạng xã hội học thuật cho nhà khoa học và nghiên cứu viên. Nơi chia sẻ bài báo, đặt câu hỏi và kết nối với cộng đồng nghiên cứu toàn cầu.',
+                link: 'https://www.researchgate.net'
+            },
+            ssrn: {
+                title: 'Social Science Research Network',
+                description: 'Mạng nghiên cứu khoa học xã hội toàn cầu, chuyên về kinh tế, tài chính, kế toán, quản trị và luật. Cung cấp hàng triệu bài nghiên cứu và working papers.',
+                link: 'https://www.ssrn.com'
+            },
+            jstor: {
+                title: 'JSTOR Digital Library',
+                description: 'Thư viện số chứa hàng triệu bài báo học thuật, sách và nguồn tài liệu chính từ nhiều lĩnh vực. Yêu cầu đăng ký hoặc truy cập qua thư viện đại học.',
+                link: 'https://www.jstor.org'
+            },
+            nber: {
+                title: 'National Bureau of Economic Research',
+                description: 'Tổ chức nghiên cứu kinh tế tư nhân hàng đầu của Mỹ. Xuất bản working papers về kinh tế vĩ mô, tài chính, lao động và nhiều lĩnh vực khác.',
+                link: 'https://www.nber.org'
+            },
+            vepr: {
+                title: 'VEPR - Viện Nghiên cứu Kinh tế và Chính sách',
+                description: 'Thuộc Đại học Quốc gia Hà Nội. Công bố báo cáo vĩ mô định kỳ, dự báo kinh tế Việt Nam, phân tích chính sách và tư vấn chính sách kinh tế.',
+                link: 'http://vepr.org.vn'
+            },
+            ciem: {
+                title: 'CIEM - Viện Nghiên cứu Quản lý Kinh tế Trung ương',
+                description: 'Viện nghiên cứu trực thuộc Bộ Kế hoạch và Đầu tư. Nghiên cứu chính sách kinh tế vĩ mô, tích hợp kinh tế quốc tế, phát triển bền vững.',
+                link: 'http://ciem.org.vn'
+            },
+            vcci: {
+                title: 'VCCI - Phòng Thương mại và Công nghiệp Việt Nam',
+                description: 'Tổ chức đại diện cho cộng đồng doanh nghiệp. Công bố Chỉ số Năng lực Cạnh tranh cấp tỉnh (PCI), báo cáo môi trường kinh doanh, chính sách hỗ trợ doanh nghiệp.',
+                link: 'https://www.vcci.com.vn'
+            },
+            wef: {
+                title: 'World Economic Forum',
+                description: 'Diễn đàn Kinh tế Thế giới. Công bố Báo cáo Cạnh tranh Toàn cầu, Báo cáo Rủi ro Toàn cầu và các phân tích về xu hướng kinh tế - xã hội thế giới.',
+                link: 'https://www.weforum.org/reports'
+            },
+            vneconomy: {
+                title: 'VnEconomy',
+                description: 'Báo điện tử chuyên sâu về kinh tế Việt Nam. Đưa tin về chính sách kinh tế, thị trường tài chính, doanh nghiệp và phân tích xu hướng kinh tế.',
+                link: 'https://vneconomy.vn'
+            },
+            cafef: {
+                title: 'CafeF',
+                description: 'Trang tin tức tài chính hàng đầu Việt Nam. Chuyên về chứng khoán, bất động sản, ngân hàng, tài chính doanh nghiệp và thông tin doanh nghiệp niêm yết.',
+                link: 'https://cafef.vn'
+            },
+            vietstock: {
+                title: 'VietStock',
+                description: 'Nền tảng thông tin và dữ liệu chứng khoán Việt Nam. Cung cấp báo cáo tài chính doanh nghiệp, phân tích kỹ thuật, tin tức thị trường và công cụ đầu tư.',
+                link: 'https://vietstock.vn'
+            }
+        };
+        
+        function showModal(id, title, description, link) {
+            const modal = document.getElementById('infoModal');
+            const data = modalData[id] || { title: title, description: description, link: link };
+            
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalDescription').textContent = data.description;
+            const linkElement = document.getElementById('modalLink');
+            linkElement.href = data.link;
+            linkElement.textContent = data.link;
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('infoModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const nodes = document.querySelectorAll('.node');
+            
+            nodes.forEach(node => {
+                node.classList.remove('highlight');
+                const text = node.textContent.toLowerCase();
+                if (searchTerm && text.includes(searchTerm)) {
+                    node.classList.add('highlight');
+                    // Scroll to first match
+                    if (node.classList.contains('highlight')) {
+                        setTimeout(() => {
+                            node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 100);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
